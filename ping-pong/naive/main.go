@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-// YouTube dan Twitter: @imrenagi
+// YouTube: @imrenagi
 // Dengan solusi sebelumnya, tambahkan fitur:
 // - Goroutine untuk referree/wasit
 // - Wasit akan mangambil bola ketika salah satu pemain
