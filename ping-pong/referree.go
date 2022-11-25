@@ -30,7 +30,7 @@ func referree(table chan *ballReferree, done chan *ballReferree) {
 	}
 }
 
-func player(name string, table chan *ballReferree, done chan *ballReferree) {
+func playerReferree(name string, table chan *ballReferree, done chan *ballReferree) {
 	for {
 		s := rand.NewSource(time.Now().Unix())
 		r := rand.New(s)

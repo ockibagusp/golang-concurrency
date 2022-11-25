@@ -6,8 +6,8 @@ func TestReferree(t *testing.T) {
 	table := make(chan *ballReferree)
 	done := make(chan *ballReferree)
 
-	go player("imre", table, done)
-	go player("ocki", table, done)
+	go playerReferree("imre", table, done)
+	go playerReferree("ocki", table, done)
 
 	// // new(ball) <=> &ball{}
 	// table <- &ball{}
