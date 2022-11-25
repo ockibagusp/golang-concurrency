@@ -1,0 +1,27 @@
+starting: /home/ockibagusp/go/bin/dlv dap --check-go-version=false --listen=127.0.0.1:44297 --log-dest=3 from /home/ockibagusp/go/src/github.com/ockibagusp/golang-concurrency/ping-pong/referree
+DAP server listening at: 127.0.0.1:44297
+Type 'dlv help' for list of commands.
+2022/11/24 22:33:44 ocki hits the ball 1
+2022/11/24 22:33:46 imre hits the ball 2
+2022/11/24 22:33:48 ocki hits the ball 3
+2022/11/24 22:33:49 imre hits the ball 4
+2022/11/24 22:33:51 ocki hits the ball 5
+2022/11/24 22:33:52 imre hits the ball 6
+...
+2022/11/24 22:34:02 imre hits the ball 14
+fatal error: all goroutines are asleep - deadlock!
+
+goroutine 1 [chan receive]:
+main.referree(0xc000100060, 0xc0001000c0)
+	/home/ockibagusp/go/src/github.com/ockibagusp/golang-concurrency/ping-pong/referree/main.go:44 +0xc5
+main.main()
+	/home/ockibagusp/go/src/github.com/ockibagusp/golang-concurrency/ping-pong/referree/main.go:30 +0x174
+
+goroutine 18 [chan send]:
+main.player({0x4d003e, 0x4}, 0xc000100060, 0xc0001000c0)
+	/home/ockibagusp/go/src/github.com/ockibagusp/golang-concurrency/ping-pong/referree/main.go:69 +0x49b
+created by main.main
+	/home/ockibagusp/go/src/github.com/ockibagusp/golang-concurrency/ping-pong/referree/main.go:20 +0xd1
+Process 10370 has exited with status 2
+Detaching
+dlv dap (10312) exited with code: 0

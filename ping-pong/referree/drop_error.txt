@@ -1,0 +1,3 @@
+➜  referree git:(master) ✗ go run main.go
+2022/11/24 22:39:03 ocki drop the ball
+2022/11/24 22:39:03 winner is (?)
