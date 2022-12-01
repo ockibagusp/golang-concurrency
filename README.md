@@ -5,10 +5,10 @@ Golang Concurrency
 
 ### Naive
 ```sh
-$ go run ping-pong/naive/main.go
+$ go test -run ^TestNaive$ github.com/ockibagusp/golang-concurrency/ping-pong
 ```
 
 ### Referree
 ```sh
-$ go run ping-pong/referree/main.go
+$ go test -run ^TestReferree2Persons$ github.com/ockibagusp/golang-concurrency/ping-pong
 ```
