@@ -36,7 +36,7 @@ func referree(table chan *ballReferree, done chan *ballReferree) {
 	}
 }
 
-// // https://stackoverflow.com/questions/61189263/panic-runtime-error-index-out-of-range-0-with-length-0
+// // https://stackoverflow.com/questions/39118941/go-panic-runtime-error-index-out-of-range-when-the-length-of-array-is-not-nu
 // var names []string = make([]string, 2)
 // // atau
 var names []string = []string{"", ""}
