@@ -36,8 +36,10 @@ func referree(table chan *ballReferree, done chan *ballReferree) {
 	}
 }
 
-// https://stackoverflow.com/questions/61189263/panic-runtime-error-index-out-of-range-0-with-length-0
-var names []string = make([]string, 2)
+// // https://stackoverflow.com/questions/61189263/panic-runtime-error-index-out-of-range-0-with-length-0
+// var names []string = make([]string, 2)
+// // atau
+var names []string = []string{"", ""}
 
 func playerReferree(name string, table chan *ballReferree, done chan *ballReferree) {
 	for {
@@ -48,6 +50,7 @@ func playerReferree(name string, table chan *ballReferree, done chan *ballReferr
 		case ball := <-table:
 			v := r.Intn(1000)
 			if v%11 == 0 {
+				// if true {
 				log.Println(name, "drop the ball")
 				done <- ball
 				return
