@@ -70,7 +70,7 @@ func TestReferree2Persons(t *testing.T) {
 	done := make(chan *ballReferree)
 
 	names = []string{"imre", "ocki"}
-	// TODO: names -> "imre", "ocki" atau "ocki", "imre"
+
 	go playerReferree(names[0], table, done)
 	go playerReferree(names[1], table, done)
 
