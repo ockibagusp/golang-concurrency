@@ -27,10 +27,10 @@ func referree(table chan *ballReferree, done chan *ballReferree) {
 		case ball := <-done:
 			if ball.lastPlayer == "" {
 				log.Printf("winner is %s*", names[0])
-			} else {
-				log.Println("winner is", ball.lastPlayer)
+				return
 			}
 
+			log.Println("winner is", ball.lastPlayer)
 			return
 		}
 	}
