@@ -32,7 +32,7 @@ func TestNaive(t *testing.T) {
 	go playerNaive("imre", table)
 	go playerNaive("ocki", table)
 
-	// new(ball) <=> &ball{}
+	// new(ballNaive) <=> &ballNaive{}
 	table <- &ballNaive{}
 	// // time.Sleep(1 * time.Second)
 	// 2022/11/22 22:53:07 ocki hits the ball 1
