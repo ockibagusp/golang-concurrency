@@ -19,7 +19,7 @@ type ballReferree struct {
 }
 
 func referree(table chan *ballReferree, done chan *ballReferree) {
-	// new(ball) <=> &ball{}
+	// new(ballReferree) <=> &ballReferree{}
 	table <- &ballReferree{}
 
 	for {
