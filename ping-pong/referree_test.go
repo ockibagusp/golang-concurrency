@@ -37,9 +37,9 @@ func referree(table chan *ballReferree, done chan *ballReferree) {
 }
 
 // // https://stackoverflow.com/questions/39118941/go-panic-runtime-error-index-out-of-range-when-the-length-of-array-is-not-nu
-// var names []string = make([]string, 2)
+// var names []string = []string{"", ""}
 // // atau
-var names []string = []string{"", ""}
+var names []string = make([]string, 2)
 
 func playerReferree(name string, table chan *ballReferree, done chan *ballReferree) {
 	for {
