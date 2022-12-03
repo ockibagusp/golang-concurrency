@@ -48,7 +48,8 @@ func playerReferree(name string, table chan *ballReferree, done chan *ballReferr
 
 		select {
 		case ball := <-table:
-			v := r.Intn(1000)
+			// v := r.Intn(1000)
+			v := r.Intn(100)
 			if v%11 == 0 {
 				// if true {
 				log.Println(name, "drop the ball")
