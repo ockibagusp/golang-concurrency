@@ -72,7 +72,23 @@ func TestReferree2Persons(t *testing.T) {
 	table := make(chan *ballReferree)
 	done := make(chan *ballReferree)
 
-	names = []string{"imre", "ocki"}
+	rand.Seed(time.Now().UnixNano())
+	oldNames := []string{"imre", "ocki"}
+
+	i := rand.Intn(len(oldNames))
+
+	names[0] = oldNames[i]
+	// https://stackoverflow.com/questions/37334119/how-to-delete-an-element-from-a-slice-in-golang
+	//
+	// or,
+	//
+	// $ go get golang.org/x/exp/slices
+	// // slice := []int{1, 2, 3, 4}
+	// // slice = slices.Delete(slice, 1, 2)
+	// // fmt.Println(slice) // [1 3 4]
+	oldNames = append(oldNames[:i], oldNames[i+1:]...)
+	names[1] = oldNames[0]
+	oldNames = append(oldNames[:0], oldNames[0+1:]...)
 
 	go playerReferree(names[0], table, done)
 	go playerReferree(names[1], table, done)
