@@ -1,6 +1,7 @@
 package patterns
 
 import (
+	"log"
 	"testing"
 )
 
@@ -54,7 +55,10 @@ func TestPatterns1(t *testing.T) {
 
 	out := discount(c)
 	for processes := range out {
+		// // @DonaldFeury
 		// fmt.Println("Category:", processes.category, "Price:", processes.price)
-		t.Log("Category:", processes.category, "●", "Price: $", processes.price)
+
+		// t.Log("Category:", processes.category+",", "Price: $", processes.price) -> no debug test
+		log.Println("Category:", processes.category+",", "Price: $", processes.price)
 	}
 }
