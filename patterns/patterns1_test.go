@@ -49,6 +49,6 @@ func TestPatterns1(t *testing.T) {
 	out := discount(c)
 	for processes := range out {
 		// fmt.Println("Category:", processes.category, "Price:", processes.price)
-		log.Println("Category:", processes.category, "Price:", processes.price)
+		log.Println("Category:", processes.category, "●", "Price: $", processes.price)
 	}
 }
