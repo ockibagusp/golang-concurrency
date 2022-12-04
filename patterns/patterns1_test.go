@@ -6,6 +6,13 @@ import (
 
 // YouTube: @DonaldFeury
 
+/*
+Pipeline
+--------
+
+routine -> routine -> routine
+*/
+
 type item struct {
 	price    int
 	category string
