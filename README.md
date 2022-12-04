@@ -5,17 +5,17 @@ Golang Concurrency
 
 ### Naive
 ```sh
-$ go test -run ^TestNaive$ github.com/ockibagusp/golang-concurrency/ping-pong
+$ go test -v ping-pong/naive_test.go
 ```
 
 ### Referree
 ```sh
-$ go test -run ^TestReferree2Persons$ github.com/ockibagusp/golang-concurrency/ping-pong
+$ go test -v ping-pong/referree_test.go
 ```
 
 ## 2. golang-concurrency-patterns
 
 ### Patterns 1
 ```sh
-$ go test -run ^TestPatterns1$ github.com/ockibagusp/golang-concurrency/patterns
+$ go test -v patterns/patterns1_test.go
 ```
