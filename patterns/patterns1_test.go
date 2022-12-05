@@ -43,7 +43,9 @@ func discount(items <-chan item) <-chan item {
 
 				// 50  / 100 = 0 (int) x
 				// 50.0 / 100.0 = 0.5 (float32) v
-				i.price = i.price * (50.0 / 100.0) // 50%
+				i.discount = i.price * i.discount
+				i.price = i.price - i.discount // 50%
+				// // i.price = i.price - (i.price * i.discount)
 			}
 			out <- i
 		}
@@ -53,9 +55,13 @@ func discount(items <-chan item) <-chan item {
 
 func TestPatterns1(t *testing.T) {
 	c := gen(
-		item{8, "shirt", 0},
-		item{20, "shoe", 0},
-		item{24, "shoe", 0},
+		item{
+			price:    8,
+			category: "shirt",
+			discount: 0,
+		},
+		item{20, "shoe", 0.05},
+		item{24, "shoe", 0.5},
 		item{4, "drink", 0},
 	)
 
@@ -65,6 +71,9 @@ func TestPatterns1(t *testing.T) {
 		// fmt.Println("Category:", processes.category, "Price:", processes.price)
 
 		// t.Log("Category:", processes.category+",", "Price: $", processes.price) -> no debug test
-		log.Println("Category:", processes.category+",", "Price: $", processes.price)
+		log.Print("Category:", processes.category+",", " Price: $", processes.price)
+		if processes.discount > 0 {
+			log.Print("\t and the discount is $", processes.discount)
+		}
 	}
 }
