@@ -15,8 +15,9 @@ routine -> routine -> routine
 */
 
 type item struct {
-	price    int
+	price    float32
 	category string
+	discount float32
 }
 
 func gen(items ...item) <-chan item {
@@ -37,7 +38,12 @@ func discount(items <-chan item) <-chan item {
 			// We have a sale going on
 			// Shoes are half off!
 			if i.category == "shoe" {
-				i.price /= 2
+				// // @DonaldFeury
+				// i.price /= 2
+
+				// 50  / 100 = 0 (int) x
+				// 50.0 / 100.0 = 0.5 (float32) v
+				i.price = i.price * (50.0 / 100.0) // 50%
 			}
 			out <- i
 		}
@@ -47,10 +53,10 @@ func discount(items <-chan item) <-chan item {
 
 func TestPatterns1(t *testing.T) {
 	c := gen(
-		item{8, "shirt"},
-		item{20, "shoe"},
-		item{24, "shoe"},
-		item{4, "drink"},
+		item{8, "shirt", 0},
+		item{20, "shoe", 0},
+		item{24, "shoe", 0},
+		item{4, "drink", 0},
 	)
 
 	out := discount(c)
