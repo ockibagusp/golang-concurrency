@@ -14,46 +14,7 @@ Pipeline
 routine -> routine -> routine
 */
 
-type item struct {
-	price    float32
-	category string
-	discount float32
-}
-
-func gen(items ...item) <-chan item {
-	// out := make(chan item, 4)
-	out := make(chan item, len(items))
-	for _, i := range items {
-		out <- i
-	}
-	close(out)
-	return out
-}
-
-func discount(items <-chan item) <-chan item {
-	out := make(chan item)
-	go func() {
-		defer close(out)
-		for i := range items {
-			// We have a sale going on
-			// Shoes are half off!
-			if i.category == "shoe" {
-				// // @DonaldFeury
-				// i.price /= 2
-
-				// 50  / 100 = 0 (int) x
-				// 50.0 / 100.0 = 0.5 (float32) v
-				i.discount = i.price * i.discount
-				i.price = i.price - i.discount // 50%
-				// // i.price = i.price - (i.price * i.discount)
-			}
-			out <- i
-		}
-	}()
-	return out
-}
-
-func TestPatterns1(t *testing.T) {
+func TestPatternsPipeline(t *testing.T) {
 	c := gen(
 		item{
 			price:    8,
