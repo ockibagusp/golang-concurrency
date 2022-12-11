@@ -33,6 +33,10 @@ func Gen(items ...Item) <-chan Item {
 func Discount(items <-chan Item) <-chan Item {
 	out := make(chan Item)
 	go func() {
+		/*
+			channel harus di close() jika tidak digunakan,
+			atau bisa menyebabkan memory leak
+		*/
 		defer close(out)
 		for i := range items {
 			// We have a sale going on
@@ -68,6 +72,10 @@ routine				-> routine -> routine
 func DiscountSleep(items <-chan Item) <-chan Item {
 	out := make(chan Item)
 	go func() {
+		/*
+			channel harus di close() jika tidak digunakan,
+			atau bisa menyebabkan memory leak
+		*/
 		defer close(out)
 		for i := range items {
 			time.Sleep(2 * time.Second)
@@ -93,6 +101,10 @@ func DiscountSleep(items <-chan Item) <-chan Item {
 func DiscountDone(done <-chan bool, items <-chan Item) <-chan Item {
 	out := make(chan Item)
 	go func() {
+		/*
+			channel harus di close() jika tidak digunakan,
+			atau bisa menyebabkan memory leak
+		*/
 		defer close(out)
 		for i := range items {
 			time.Sleep(2 * time.Second)
@@ -136,6 +148,10 @@ func FanIn(channels ...<-chan Item) <-chan Item {
 	}
 	go func() {
 		wg.Wait()
+		/*
+			channel harus di close() jika tidak digunakan,
+			atau bisa menyebabkan memory leak
+		*/
 		close(out)
 	}()
 	return out
@@ -161,6 +177,10 @@ func FanInDone(done <-chan bool, channels ...<-chan Item) <-chan Item {
 	}
 	go func() {
 		wg.Wait()
+		/*
+			channel harus di close() jika tidak digunakan,
+			atau bisa menyebabkan memory leak
+		*/
 		close(out)
 	}()
 	return out
