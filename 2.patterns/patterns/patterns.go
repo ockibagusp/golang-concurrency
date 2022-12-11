@@ -14,15 +14,15 @@ Pipeline
 routine -> routine -> routine
 */
 
-type item struct {
-	price    float32
-	category string
-	discount float32
+type Item struct {
+	Price    float32
+	Category string
+	Discount float32
 }
 
-func gen(items ...item) <-chan item {
+func Gen(items ...Item) <-chan Item {
 	// out := make(chan item, 4)
-	out := make(chan item, len(items))
+	out := make(chan Item, len(items))
 	for _, i := range items {
 		out <- i
 	}
@@ -30,21 +30,21 @@ func gen(items ...item) <-chan item {
 	return out
 }
 
-func discount(items <-chan item) <-chan item {
-	out := make(chan item)
+func Discount(items <-chan Item) <-chan Item {
+	out := make(chan Item)
 	go func() {
 		defer close(out)
 		for i := range items {
 			// We have a sale going on
 			// Shoes are half off!
-			if i.category == "shoe" {
+			if i.Category == "shoe" {
 				// // @DonaldFeury
 				// i.price /= 2
 
 				// 50  / 100 = 0 (int) x
 				// 50.0 / 100.0 = 0.5 (float32) v
-				i.discount = i.price * i.discount
-				i.price = i.price - i.discount // 50%
+				i.Discount = i.Price * i.Discount
+				i.Price = i.Price - i.Discount // 50%
 				// // i.price = i.price - (i.price * i.discount)
 			}
 			out <- i
@@ -65,8 +65,8 @@ routine				-> routine -> routine
 		  routine
 */
 
-func discountSleep(items <-chan item) <-chan item {
-	out := make(chan item)
+func DiscountSleep(items <-chan Item) <-chan Item {
+	out := make(chan Item)
 	go func() {
 		defer close(out)
 		for i := range items {
@@ -74,14 +74,14 @@ func discountSleep(items <-chan item) <-chan item {
 
 			// We have a sale going on
 			// Shoes are half off!
-			if i.category == "shoe" {
+			if i.Category == "shoe" {
 				// // @DonaldFeury
 				// i.price /= 2
 
 				// 50  / 100 = 0 (int) x
 				// 50.0 / 100.0 = 0.5 (float32) v
-				i.discount = i.price * i.discount
-				i.price = i.price - i.discount // 50%
+				i.Discount = i.Price * i.Discount
+				i.Price = i.Price - i.Discount // 50%
 				// // i.price = i.price - (i.price * i.discount)
 			}
 			out <- i
@@ -90,8 +90,8 @@ func discountSleep(items <-chan item) <-chan item {
 	return out
 }
 
-func discountDone(done <-chan bool, items <-chan item) <-chan item {
-	out := make(chan item)
+func DiscountDone(done <-chan bool, items <-chan Item) <-chan Item {
+	out := make(chan Item)
 	go func() {
 		defer close(out)
 		for i := range items {
@@ -99,14 +99,14 @@ func discountDone(done <-chan bool, items <-chan item) <-chan item {
 
 			// We have a sale going on
 			// Shoes are half off!
-			if i.category == "shoe" {
+			if i.Category == "shoe" {
 				// // @DonaldFeury
 				// i.price /= 2
 
 				// 50  / 100 = 0 (int) x
 				// 50.0 / 100.0 = 0.5 (float32) v
-				i.discount = i.price * i.discount
-				i.price = i.price - i.discount // 50%
+				i.Discount = i.Price * i.Discount
+				i.Price = i.Price - i.Discount // 50%
 				// // i.price = i.price - (i.price * i.discount)
 			}
 
@@ -120,10 +120,10 @@ func discountDone(done <-chan bool, items <-chan item) <-chan item {
 	return out
 }
 
-func fanIn(channels ...<-chan item) <-chan item {
+func FanIn(channels ...<-chan Item) <-chan Item {
 	var wg sync.WaitGroup
-	out := make(chan item)
-	output := func(c <-chan item) {
+	out := make(chan Item)
+	output := func(c <-chan Item) {
 		defer wg.Done()
 		for i := range c {
 			out <- i
@@ -141,10 +141,10 @@ func fanIn(channels ...<-chan item) <-chan item {
 	return out
 }
 
-func fanInDone(done <-chan bool, channels ...<-chan item) <-chan item {
+func FanInDone(done <-chan bool, channels ...<-chan Item) <-chan Item {
 	var wg sync.WaitGroup
-	out := make(chan item)
-	output := func(c <-chan item) {
+	out := make(chan Item)
+	output := func(c <-chan Item) {
 		defer wg.Done()
 		for i := range c {
 			select {

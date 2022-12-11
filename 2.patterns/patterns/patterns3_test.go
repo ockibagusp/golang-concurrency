@@ -21,20 +21,20 @@ func TestPatternsFanInFanOut2(t *testing.T) {
 	done := make(chan bool)
 	defer close(done)
 
-	c := gen(
-		item{
-			price:    8,
-			category: "shirt",
-			discount: 0,
+	c := Gen(
+		Item{
+			Price:    8,
+			Category: "shirt",
+			Discount: 0,
 		},
-		item{20, "shoe", 0.05},
-		item{24, "shoe", 0.5},
-		item{4, "drink", 0},
+		Item{20, "shoe", 0.05},
+		Item{24, "shoe", 0.5},
+		Item{4, "drink", 0},
 	)
 
-	c1 := discountDone(done, c)
-	c2 := discountDone(done, c)
-	out := fanInDone(done, c1, c2)
+	c1 := DiscountDone(done, c)
+	c2 := DiscountDone(done, c)
+	out := FanInDone(done, c1, c2)
 	// for processes := range out {
 	// 	// // @DonaldFeury
 	// 	// fmt.Println("Category:", processes.category, "Price:", processes.price)
