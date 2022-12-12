@@ -71,17 +71,17 @@ func main() {
 	c2 = patterns.DiscountDone(done, c)
 	out = patterns.FanInDone(done, c1, c2)
 	// for processes := range out {
-	// 	// // @DonaldFeury
-	// 	// fmt.Println("Category:", processes.Category, "Price:", processes.Price)
+	// 	// @DonaldFeury
+	//	fmt.Println("Category:", processes.Category, "Price:", processes.Price)
 
 	// 	// t.Log("Category:", processes.Category+",", "Price: $", processes.Price) -> no debug test
-	// 	log.Print("Category:", processes.Category+",", " Price: $", processes.Price)
+	// 	log.Print("3. Category:", processes.Category+",", " Price: $", processes.Price)
 	// 	if processes.Discount > 0 {
 	// 		log.Print("\t and the discount is $", processes.Discount)
 	// 	}
 	// }
 
-	// // @DonaldFeury
+	// @DonaldFeury
 	log.Println(<-out)
 	log.Println(<-out)
 
