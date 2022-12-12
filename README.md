@@ -29,3 +29,8 @@ $ go test -v 2.patterns/patterns2_test.go
 ```sh
 $ go test -v 2.patterns/patterns3_test.go
 ```
+
+### Or, all of them Patterns...
+```sh
+$ go run ./2.patterns/main.go
+```
