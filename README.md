@@ -34,3 +34,15 @@ $ go test -v 2.patterns/patterns3_test.go
 ```sh
 $ go run ./2.patterns/main.go
 ```
+
+## 3. bank
+
+### Mutex
+```sh
+$ go test -v 3.bank/bank_account_mutex_test.go
+```
+
+### Mutex
+```sh
+$ go test -v 3.bank/bank_account_mutex_test.go
+```
