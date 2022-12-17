@@ -14,10 +14,14 @@ type BankAccountChannel struct {
 }
 
 func (account *BankAccountChannel) SumBalanceChannel(channel chan bool, amount int) {
+	// 1. defer
+	defer account.WaitGroup.Done()
+
 	channel <- true
 	account.Balance += amount
 	<-channel
-	account.WaitGroup.Done()
+	// 2. or...
+	// account.WaitGroup.Done()
 }
 
 func (account *BankAccountChannel) GetBalanceChannel(channel chan bool) int {

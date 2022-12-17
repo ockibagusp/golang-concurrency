@@ -15,10 +15,14 @@ type BankAccountMutex struct {
 }
 
 func (account *BankAccountMutex) SumBalance(amount int) {
+	// 1. defer
+	defer account.WaitGroup.Done()
+
 	account.Mutex.Lock()
 	account.Balance += amount
 	account.Mutex.Unlock()
-	account.WaitGroup.Done()
+	// 2. or...
+	// account.WaitGroup.Done()
 }
 
 func (account *BankAccountMutex) GetBalance() int {
