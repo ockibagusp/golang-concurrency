@@ -10,8 +10,8 @@ import (
 
 type BankAccountMutex struct {
 	sync.Mutex
-	WaitGroup sync.WaitGroup
-	Balance   int
+	sync.WaitGroup
+	Balance int
 }
 
 func (account *BankAccountMutex) SumBalance(amount int) {
