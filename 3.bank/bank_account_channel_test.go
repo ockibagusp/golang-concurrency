@@ -7,6 +7,7 @@ import (
 
 // Github: @ProgrammerZamanNow
 // Youtube: @mattkdvb5154
+// https://golangbot.com/mutex/
 
 type BankAccountChannel struct {
 	WaitGroup sync.WaitGroup
