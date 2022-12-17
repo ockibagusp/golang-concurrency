@@ -9,15 +9,16 @@ import (
 // Youtube: @mattkdvb5154
 
 type BankAccountMutex struct {
-	Mutex   sync.Mutex
-	Balance int
+	Mutex     sync.Mutex
+	WaitGroup sync.WaitGroup
+	Balance   int
 }
 
-func (account *BankAccountMutex) SumBalance(wg *sync.WaitGroup, amount int) {
+func (account *BankAccountMutex) SumBalance(amount int) {
 	account.Mutex.Lock()
 	account.Balance += amount
 	account.Mutex.Unlock()
-	wg.Done()
+	account.WaitGroup.Done()
 }
 
 func (account *BankAccountMutex) GetBalance() int {
@@ -28,32 +29,30 @@ func (account *BankAccountMutex) GetBalance() int {
 }
 
 func TestBankAccountMutex(t *testing.T) {
-	var wg sync.WaitGroup
-
 	account := BankAccountMutex{}
 
 	// add: +10.000
-	wg.Add(1)
-	go account.SumBalance(&wg, 10000)
-	wg.Wait()
+	account.WaitGroup.Add(1)
+	go account.SumBalance(10000)
+	account.WaitGroup.Wait()
 
 	if getbalance := account.GetBalance(); getbalance != 10000 {
 		t.Errorf("account.GetBalance == 10000; want: %d", getbalance)
 	}
 
 	// reduce: -5000
-	wg.Add(1)
-	go account.SumBalance(&wg, -5000)
-	wg.Wait()
+	account.WaitGroup.Add(1)
+	go account.SumBalance(-5000)
+	account.WaitGroup.Wait()
 
 	if getbalance := account.GetBalance(); getbalance != 5000 {
 		t.Errorf("account.GetBalance == 5000; want: %d", getbalance)
 	}
 
 	// reduce: -5000
-	wg.Add(1)
-	go account.SumBalance(&wg, -5000)
-	wg.Wait()
+	account.WaitGroup.Add(1)
+	go account.SumBalance(-5000)
+	account.WaitGroup.Wait()
 
 	if getbalance := account.GetBalance(); getbalance != 0 {
 		t.Errorf("account.GetBalance == 0; want: %d", getbalance)
@@ -61,12 +60,12 @@ func TestBankAccountMutex(t *testing.T) {
 
 	// add: 1 * 100 => 100
 	for i := 0; i < 100; i++ {
-		wg.Add(1)
+		account.WaitGroup.Add(1)
 		go func() {
-			account.SumBalance(&wg, 1)
+			account.SumBalance(1)
 		}()
 	}
-	wg.Wait()
+	account.WaitGroup.Wait()
 
 	if getbalance := account.GetBalance(); getbalance != 100 {
 		t.Errorf("account.GetBalance == 100; want: %d", getbalance)
