@@ -12,14 +12,14 @@ type BankAccountChannel struct {
 	Balance int
 }
 
-func (account *BankAccountMutex) SumBalanceChannel(wg *sync.WaitGroup, channel chan bool, amount int) {
+func (account *BankAccountChannel) SumBalanceChannel(wg *sync.WaitGroup, channel chan bool, amount int) {
 	channel <- true
 	account.Balance += amount
 	<-channel
 	wg.Done()
 }
 
-func (account *BankAccountMutex) GetBalanceChannel(channel chan bool) int {
+func (account *BankAccountChannel) GetBalanceChannel(channel chan bool) int {
 	channel <- true
 	balance := account.Balance
 	<-channel
@@ -30,7 +30,7 @@ func TestBankAccountChannel(t *testing.T) {
 	var wg sync.WaitGroup
 	channel := make(chan bool, 1)
 
-	account := BankAccountMutex{}
+	account := BankAccountChannel{}
 
 	// add: +10.000
 	wg.Add(1)
