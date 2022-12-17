@@ -9,7 +9,7 @@ import (
 // Youtube: @mattkdvb5154
 
 type BankAccountMutex struct {
-	Mutex     sync.Mutex
+	sync.Mutex
 	WaitGroup sync.WaitGroup
 	Balance   int
 }
