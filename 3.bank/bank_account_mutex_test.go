@@ -9,8 +9,8 @@ import (
 // Youtube: @mattkdvb5154
 
 type BankAccountMutex struct {
-	sync.Mutex
-	sync.WaitGroup
+	*sync.Mutex
+	*sync.WaitGroup
 	Balance int
 }
 
@@ -33,7 +33,12 @@ func (account *BankAccountMutex) GetBalance() int {
 }
 
 func TestBankAccountMutex(t *testing.T) {
-	account := BankAccountMutex{}
+	account := BankAccountMutex{
+		Mutex:     &sync.Mutex{},
+		WaitGroup: &sync.WaitGroup{},
+		// // equal or...
+		// Balance: 0,
+	}
 
 	// add: +10.000
 	account.WaitGroup.Add(1)
