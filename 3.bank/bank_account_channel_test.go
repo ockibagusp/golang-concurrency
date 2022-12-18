@@ -10,8 +10,8 @@ import (
 // https://golangbot.com/mutex/
 
 type BankAccountChannel struct {
-	WaitGroup sync.WaitGroup
-	Balance   int
+	sync.WaitGroup
+	Balance int
 }
 
 func (account *BankAccountChannel) SumBalanceChannel(channel chan bool, amount int) {
