@@ -42,7 +42,7 @@ $ go run ./2.patterns/main.go
 $ go test -v 3.bank/bank_account_mutex_test.go
 ```
 
-### Mutex
+### Channel
 ```sh
-$ go test -v 3.bank/bank_account_mutex_test.go
+$ go test -v 3.bank/bank_account_channel_test.go
 ```
