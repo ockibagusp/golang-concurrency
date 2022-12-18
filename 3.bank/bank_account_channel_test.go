@@ -33,7 +33,10 @@ func (account *BankAccountChannel) GetBalanceChannel(channel chan bool) int {
 }
 
 func TestBankAccountChannel(t *testing.T) {
+	// channel := make(chan bool)
+	// // fatal error: all goroutines are asleep - deadlock!
 	channel := make(chan bool, 1)
+	// PASS
 
 	account := BankAccountChannel{}
 
