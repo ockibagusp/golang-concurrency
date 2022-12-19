@@ -8,6 +8,8 @@ import (
 // Github: @ProgrammerZamanNow
 // Youtube: @mattkdvb5154
 // https://golangbot.com/mutex/
+// 		-> Mutex since this problem does not require any communication between the goroutines.
+//		-> Hence mutex would be a natural fit.
 
 type BankAccountChannel struct {
 	channel chan bool
