@@ -17,6 +17,7 @@ type result struct {
 	latency time.Duration
 }
 
+// parallel
 func get(url string, ch chan<- result) {
 	start := time.Now()
 
