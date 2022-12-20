@@ -32,6 +32,10 @@ $ go test -v 2.patterns/patterns3_test.go
 
 ### Or, all of them Patterns...
 ```sh
+$ go run ./2.patterns
+```
+
+```sh
 $ go run ./2.patterns/main.go
 ```
 
@@ -45,4 +49,23 @@ $ go test -v 3.bank/bank_account_mutex_test.go
 ### Channel
 ```sh
 $ go test -v 3.bank/bank_account_channel_test.go
+```
+
+## 4. get-url
+
+### get url
+```sh
+$ go test -v 4.get-url/get_url_test.go
+```
+
+### stopper
+```sh
+$ go test -v 4.get-url/get_url_stopper_test.go
+```
+
+## 5. multi
+
+### multi
+```sh
+$ go test -v 5.multi/multi_test.go
 ```
