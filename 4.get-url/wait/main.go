@@ -23,7 +23,7 @@ func main() {
 	err := http.ListenAndServe(":8080", nil)
 
 	if errors.Is(err, http.ErrServerClosed) {
-		log.Printf("server closed\n")
+		log.Println("server closed")
 	} else if err != nil {
 		log.Printf("error starting server: %s\n", err)
 		os.Exit(1)

@@ -59,6 +59,12 @@ $ go test -v 4.get-url/get_url_test.go
 ```
 
 ### stopper
+#### http wait
+```sh
+$ go run 4.get-url/wait/main.go
+```
+
+#### testing stopper
 ```sh
 $ go test -v 4.get-url/get_url_stopper_test.go
 ```
